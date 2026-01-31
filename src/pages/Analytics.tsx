@@ -1,7 +1,10 @@
+import { Suspense, lazy, useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Layout } from '@/components/layout/Layout';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useState } from 'react';
+import { GlassCard } from '@/components/animations/GlassCard';
+import { AnimatedSection } from '@/components/animations/AnimatedSection';
+import { BarChart3, TrendingUp, Calendar, Sparkles } from 'lucide-react';
 import {
   ResponsiveContainer,
   LineChart,
@@ -16,6 +19,8 @@ import {
   AreaChart,
   Area,
 } from 'recharts';
+
+const ParticleField = lazy(() => import('@/components/3d/ParticleField').then(m => ({ default: m.ParticleField })));
 
 // Mock data for charts
 const dailyData = [
@@ -69,138 +74,82 @@ const monthlyTrend = [
 
 export default function Analytics() {
   const [timeRange, setTimeRange] = useState('7d');
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <Layout>
-      <div className="container py-8 lg:py-12">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
-          <div>
-            <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-              Traffic Analytics
-            </h1>
-            <p className="text-lg text-muted-foreground">
-              Visualize traffic patterns and trends over time
-            </p>
+      {/* Hero Section */}
+      <section className="relative pt-24 pb-12 overflow-hidden">
+        <Suspense fallback={null}>
+          <ParticleField className="opacity-20" />
+        </Suspense>
+        
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
+        
+        <div className="container relative z-10">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <AnimatedSection>
+              <motion.div 
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm text-primary text-sm font-medium mb-4"
+                whileHover={shouldReduceMotion ? undefined : { scale: 1.05 }}
+              >
+                <BarChart3 className="h-4 w-4" />
+                Data Insights
+              </motion.div>
+              
+              <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-2">
+                Traffic{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+                  Analytics
+                </span>
+              </h1>
+              <p className="text-lg text-muted-foreground">
+                Visualize traffic patterns and trends over time
+              </p>
+            </AnimatedSection>
+            
+            <AnimatedSection delay={0.1}>
+              <Select value={timeRange} onValueChange={setTimeRange}>
+                <SelectTrigger className="w-44 bg-background/50 backdrop-blur-sm border-border/50">
+                  <Calendar className="h-4 w-4 mr-2" />
+                  <SelectValue placeholder="Time range" />
+                </SelectTrigger>
+                <SelectContent className="bg-popover/95 backdrop-blur-xl border-border/50">
+                  <SelectItem value="7d">Last 7 days</SelectItem>
+                  <SelectItem value="30d">Last 30 days</SelectItem>
+                  <SelectItem value="90d">Last 90 days</SelectItem>
+                  <SelectItem value="1y">Last year</SelectItem>
+                </SelectContent>
+              </Select>
+            </AnimatedSection>
           </div>
-          <Select value={timeRange} onValueChange={setTimeRange}>
-            <SelectTrigger className="w-40 mt-4 md:mt-0">
-              <SelectValue placeholder="Time range" />
-            </SelectTrigger>
-            <SelectContent className="bg-popover">
-              <SelectItem value="7d">Last 7 days</SelectItem>
-              <SelectItem value="30d">Last 30 days</SelectItem>
-              <SelectItem value="90d">Last 90 days</SelectItem>
-              <SelectItem value="1y">Last year</SelectItem>
-            </SelectContent>
-          </Select>
         </div>
+      </section>
 
-        <div className="grid gap-6">
-          {/* Daily Traffic Trend */}
-          <Card className="border-border">
-            <CardHeader>
-              <CardTitle>Daily Traffic Volume</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="h-80">
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={dailyData}>
-                    <defs>
-                      <linearGradient id="colorTraffic" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.3} />
-                        <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0} />
-                      </linearGradient>
-                    </defs>
-                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                    <XAxis 
-                      dataKey="date" 
-                      stroke="hsl(var(--muted-foreground))"
-                      fontSize={12}
-                    />
-                    <YAxis 
-                      stroke="hsl(var(--muted-foreground))"
-                      fontSize={12}
-                    />
-                    <Tooltip
-                      contentStyle={{
-                        backgroundColor: 'hsl(var(--popover))',
-                        border: '1px solid hsl(var(--border))',
-                        borderRadius: 'var(--radius)',
-                      }}
-                    />
-                    <Area
-                      type="monotone"
-                      dataKey="traffic"
-                      stroke="hsl(var(--primary))"
-                      strokeWidth={2}
-                      fillOpacity={1}
-                      fill="url(#colorTraffic)"
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
-              </div>
-            </CardContent>
-          </Card>
-
-          <div className="grid lg:grid-cols-2 gap-6">
-            {/* Weekday Distribution */}
-            <Card className="border-border">
-              <CardHeader>
-                <CardTitle>Weekday Traffic Distribution</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="h-72">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={weekdayData}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                      <XAxis 
-                        dataKey="day" 
-                        stroke="hsl(var(--muted-foreground))"
-                        fontSize={12}
-                        tickFormatter={(value) => value.slice(0, 3)}
-                      />
-                      <YAxis 
-                        stroke="hsl(var(--muted-foreground))"
-                        fontSize={12}
-                      />
-                      <Tooltip
-                        contentStyle={{
-                          backgroundColor: 'hsl(var(--popover))',
-                          border: '1px solid hsl(var(--border))',
-                          borderRadius: 'var(--radius)',
-                        }}
-                      />
-                      <Legend />
-                      <Bar 
-                        dataKey="traffic" 
-                        name="Current Period"
-                        fill="hsl(var(--primary))" 
-                        radius={[4, 4, 0, 0]}
-                      />
-                      <Bar 
-                        dataKey="avg" 
-                        name="Average"
-                        fill="hsl(var(--secondary))" 
-                        radius={[4, 4, 0, 0]}
-                      />
-                    </BarChart>
-                  </ResponsiveContainer>
+      <section className="pb-24">
+        <div className="container">
+          <div className="grid gap-6">
+            {/* Daily Traffic Trend */}
+            <AnimatedSection delay={0.1}>
+              <GlassCard className="p-6" hover={false}>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center">
+                    <TrendingUp className="h-5 w-5 text-primary" />
+                  </div>
+                  <h2 className="text-xl font-bold text-foreground">Daily Traffic Volume</h2>
                 </div>
-              </CardContent>
-            </Card>
-
-            {/* Seasonal Analysis */}
-            <Card className="border-border">
-              <CardHeader>
-                <CardTitle>Seasonal Traffic Analysis</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="h-72">
+                <div className="h-80">
                   <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={seasonalData}>
+                    <AreaChart data={dailyData}>
+                      <defs>
+                        <linearGradient id="colorTraffic" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.3} />
+                          <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0} />
+                        </linearGradient>
+                      </defs>
                       <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                       <XAxis 
-                        dataKey="season" 
+                        dataKey="date" 
                         stroke="hsl(var(--muted-foreground))"
                         fontSize={12}
                       />
@@ -213,79 +162,181 @@ export default function Analytics() {
                           backgroundColor: 'hsl(var(--popover))',
                           border: '1px solid hsl(var(--border))',
                           borderRadius: 'var(--radius)',
+                          backdropFilter: 'blur(12px)',
+                        }}
+                      />
+                      <Area
+                        type="monotone"
+                        dataKey="traffic"
+                        stroke="hsl(var(--primary))"
+                        strokeWidth={2}
+                        fillOpacity={1}
+                        fill="url(#colorTraffic)"
+                      />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </div>
+              </GlassCard>
+            </AnimatedSection>
+
+            <div className="grid lg:grid-cols-2 gap-6">
+              {/* Weekday Distribution */}
+              <AnimatedSection delay={0.2}>
+                <GlassCard className="p-6" hover={false}>
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-secondary/20 to-secondary/10 flex items-center justify-center">
+                      <BarChart3 className="h-5 w-5 text-secondary" />
+                    </div>
+                    <h2 className="text-xl font-bold text-foreground">Weekday Distribution</h2>
+                  </div>
+                  <div className="h-72">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <BarChart data={weekdayData}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                        <XAxis 
+                          dataKey="day" 
+                          stroke="hsl(var(--muted-foreground))"
+                          fontSize={12}
+                          tickFormatter={(value) => value.slice(0, 3)}
+                        />
+                        <YAxis 
+                          stroke="hsl(var(--muted-foreground))"
+                          fontSize={12}
+                        />
+                        <Tooltip
+                          contentStyle={{
+                            backgroundColor: 'hsl(var(--popover))',
+                            border: '1px solid hsl(var(--border))',
+                            borderRadius: 'var(--radius)',
+                            backdropFilter: 'blur(12px)',
+                          }}
+                        />
+                        <Legend />
+                        <Bar 
+                          dataKey="traffic" 
+                          name="Current Period"
+                          fill="hsl(var(--primary))" 
+                          radius={[4, 4, 0, 0]}
+                        />
+                        <Bar 
+                          dataKey="avg" 
+                          name="Average"
+                          fill="hsl(var(--secondary))" 
+                          radius={[4, 4, 0, 0]}
+                        />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </div>
+                </GlassCard>
+              </AnimatedSection>
+
+              {/* Seasonal Analysis */}
+              <AnimatedSection delay={0.3}>
+                <GlassCard className="p-6" hover={false}>
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-chart-3/20 to-chart-3/10 flex items-center justify-center">
+                      <Sparkles className="h-5 w-5 text-chart-3" />
+                    </div>
+                    <h2 className="text-xl font-bold text-foreground">Seasonal Analysis</h2>
+                  </div>
+                  <div className="h-72">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <BarChart data={seasonalData}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                        <XAxis 
+                          dataKey="season" 
+                          stroke="hsl(var(--muted-foreground))"
+                          fontSize={12}
+                        />
+                        <YAxis 
+                          stroke="hsl(var(--muted-foreground))"
+                          fontSize={12}
+                        />
+                        <Tooltip
+                          contentStyle={{
+                            backgroundColor: 'hsl(var(--popover))',
+                            border: '1px solid hsl(var(--border))',
+                            borderRadius: 'var(--radius)',
+                            backdropFilter: 'blur(12px)',
+                          }}
+                        />
+                        <Legend />
+                        <Bar 
+                          dataKey="traffic" 
+                          name="Actual"
+                          fill="hsl(var(--chart-1))" 
+                          radius={[4, 4, 0, 0]}
+                        />
+                        <Bar 
+                          dataKey="predicted" 
+                          name="Predicted"
+                          fill="hsl(var(--chart-2))" 
+                          radius={[4, 4, 0, 0]}
+                        />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </div>
+                </GlassCard>
+              </AnimatedSection>
+            </div>
+
+            {/* Monthly Comparison */}
+            <AnimatedSection delay={0.4}>
+              <GlassCard className="p-6" hover={false}>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-chart-4/20 to-chart-4/10 flex items-center justify-center">
+                    <TrendingUp className="h-5 w-5 text-chart-4" />
+                  </div>
+                  <h2 className="text-xl font-bold text-foreground">Monthly Comparison (Current vs Last Year)</h2>
+                </div>
+                <div className="h-80">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={monthlyTrend}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                      <XAxis 
+                        dataKey="month" 
+                        stroke="hsl(var(--muted-foreground))"
+                        fontSize={12}
+                      />
+                      <YAxis 
+                        stroke="hsl(var(--muted-foreground))"
+                        fontSize={12}
+                      />
+                      <Tooltip
+                        contentStyle={{
+                          backgroundColor: 'hsl(var(--popover))',
+                          border: '1px solid hsl(var(--border))',
+                          borderRadius: 'var(--radius)',
+                          backdropFilter: 'blur(12px)',
                         }}
                       />
                       <Legend />
-                      <Bar 
-                        dataKey="traffic" 
-                        name="Actual"
-                        fill="hsl(var(--chart-1))" 
-                        radius={[4, 4, 0, 0]}
+                      <Line
+                        type="monotone"
+                        dataKey="current"
+                        name="Current Year"
+                        stroke="hsl(var(--primary))"
+                        strokeWidth={3}
+                        dot={{ fill: 'hsl(var(--primary))', strokeWidth: 2 }}
+                        activeDot={{ r: 6, fill: 'hsl(var(--primary))' }}
                       />
-                      <Bar 
-                        dataKey="predicted" 
-                        name="Predicted"
-                        fill="hsl(var(--chart-2))" 
-                        radius={[4, 4, 0, 0]}
+                      <Line
+                        type="monotone"
+                        dataKey="lastYear"
+                        name="Last Year"
+                        stroke="hsl(var(--muted-foreground))"
+                        strokeWidth={2}
+                        strokeDasharray="5 5"
+                        dot={{ fill: 'hsl(var(--muted-foreground))' }}
                       />
-                    </BarChart>
+                    </LineChart>
                   </ResponsiveContainer>
                 </div>
-              </CardContent>
-            </Card>
+              </GlassCard>
+            </AnimatedSection>
           </div>
-
-          {/* Monthly Comparison */}
-          <Card className="border-border">
-            <CardHeader>
-              <CardTitle>Monthly Comparison (Current vs Last Year)</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="h-80">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={monthlyTrend}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                    <XAxis 
-                      dataKey="month" 
-                      stroke="hsl(var(--muted-foreground))"
-                      fontSize={12}
-                    />
-                    <YAxis 
-                      stroke="hsl(var(--muted-foreground))"
-                      fontSize={12}
-                    />
-                    <Tooltip
-                      contentStyle={{
-                        backgroundColor: 'hsl(var(--popover))',
-                        border: '1px solid hsl(var(--border))',
-                        borderRadius: 'var(--radius)',
-                      }}
-                    />
-                    <Legend />
-                    <Line
-                      type="monotone"
-                      dataKey="current"
-                      name="Current Year"
-                      stroke="hsl(var(--primary))"
-                      strokeWidth={2}
-                      dot={{ fill: 'hsl(var(--primary))' }}
-                    />
-                    <Line
-                      type="monotone"
-                      dataKey="lastYear"
-                      name="Last Year"
-                      stroke="hsl(var(--muted-foreground))"
-                      strokeWidth={2}
-                      strokeDasharray="5 5"
-                      dot={{ fill: 'hsl(var(--muted-foreground))' }}
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
-              </div>
-            </CardContent>
-          </Card>
         </div>
-      </div>
+      </section>
     </Layout>
   );
 }

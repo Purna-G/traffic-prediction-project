@@ -1,7 +1,11 @@
+import { Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 import { Layout } from '@/components/layout/Layout';
+import { AnimatedSection, AnimatedCounter } from '@/components/animations/AnimatedSection';
+import { GlassCard } from '@/components/animations/GlassCard';
+import { ParallaxSection, ScaleOnScroll } from '@/components/animations/ParallaxSection';
 import { 
   TrendingUp, 
   BarChart3, 
@@ -11,9 +15,14 @@ import {
   ArrowRight,
   Zap,
   Shield,
-  Target
+  Target,
+  Sparkles
 } from 'lucide-react';
-import heroImage from '@/assets/hero-traffic.jpg';
+
+// Lazy load 3D components for performance
+const TrafficScene = lazy(() => import('@/components/3d/TrafficScene').then(m => ({ default: m.TrafficScene })));
+const FloatingCar = lazy(() => import('@/components/3d/FloatingCar').then(m => ({ default: m.FloatingCar })));
+const ParticleField = lazy(() => import('@/components/3d/ParticleField').then(m => ({ default: m.ParticleField })));
 
 const features = [
   {
@@ -63,175 +72,319 @@ const benefits = [
   },
 ];
 
+function LoadingFallback() {
+  return (
+    <div className="absolute inset-0 flex items-center justify-center">
+      <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+    </div>
+  );
+}
+
 export default function Index() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="relative overflow-hidden">
-        <div 
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: `url(${heroImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        >
-          <div className="absolute inset-0 bg-background/85 dark:bg-background/90" />
-        </div>
+      {/* Hero Section with 3D Scene */}
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+        {/* 3D Traffic Scene Background */}
+        <Suspense fallback={<LoadingFallback />}>
+          <div className="absolute inset-0 z-0">
+            <TrafficScene />
+          </div>
+        </Suspense>
+        
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 z-[1] bg-gradient-to-b from-background/70 via-background/50 to-background" />
         
         <div className="container relative z-10 py-20 lg:py-32">
-          <div className="max-w-3xl mx-auto text-center space-y-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
-              <Cpu className="h-4 w-4" />
-              ML-Powered Traffic Intelligence
-            </div>
+          <div className="max-w-4xl mx-auto text-center space-y-8">
+            <AnimatedSection delay={0.1}>
+              <motion.div 
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 dark:bg-primary/20 border border-primary/20 backdrop-blur-sm text-primary text-sm font-medium"
+                whileHover={shouldReduceMotion ? undefined : { scale: 1.05 }}
+              >
+                <Sparkles className="h-4 w-4" />
+                ML-Powered Traffic Intelligence
+              </motion.div>
+            </AnimatedSection>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-              Predict Traffic Volume with{' '}
-              <span className="text-primary">AI Precision</span>
-            </h1>
+            <AnimatedSection delay={0.2}>
+              <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-foreground leading-tight tracking-tight">
+                Predict Traffic Volume with{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-secondary">
+                  AI Precision
+                </span>
+              </h1>
+            </AnimatedSection>
             
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-              Harness the power of machine learning to forecast traffic patterns based on weather, 
-              time, and historical data. Make smarter urban planning decisions.
-            </p>
+            <AnimatedSection delay={0.3}>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                Harness the power of machine learning to forecast traffic patterns based on weather, 
+                time, and historical data. Make smarter urban planning decisions.
+              </p>
+            </AnimatedSection>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" className="text-lg px-8">
-                <Link to="/predict">
-                  <TrendingUp className="mr-2 h-5 w-5" />
-                  Start Predicting
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="text-lg px-8">
-                <Link to="/analytics">
-                  <BarChart3 className="mr-2 h-5 w-5" />
-                  View Analytics
-                </Link>
-              </Button>
-            </div>
+            <AnimatedSection delay={0.4}>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                <motion.div
+                  whileHover={shouldReduceMotion ? undefined : { scale: 1.05, y: -2 }}
+                  whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
+                >
+                  <Button asChild size="lg" className="text-lg px-8 py-6 rounded-xl shadow-lg shadow-primary/25 bg-gradient-to-r from-primary to-primary/90">
+                    <Link to="/predict">
+                      <TrendingUp className="mr-2 h-5 w-5" />
+                      Start Predicting
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Link>
+                  </Button>
+                </motion.div>
+                
+                <motion.div
+                  whileHover={shouldReduceMotion ? undefined : { scale: 1.05, y: -2 }}
+                  whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
+                >
+                  <Button asChild variant="outline" size="lg" className="text-lg px-8 py-6 rounded-xl backdrop-blur-sm bg-background/50 border-border/50">
+                    <Link to="/analytics">
+                      <BarChart3 className="mr-2 h-5 w-5" />
+                      View Analytics
+                    </Link>
+                  </Button>
+                </motion.div>
+              </div>
+            </AnimatedSection>
           </div>
         </div>
+        
+        {/* Scroll Indicator */}
+        <motion.div 
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+          animate={shouldReduceMotion ? undefined : { y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          <div className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex justify-center pt-2">
+            <motion.div 
+              className="w-1.5 h-3 rounded-full bg-primary"
+              animate={shouldReduceMotion ? undefined : { y: [0, 12, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+          </div>
+        </motion.div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-12 bg-card border-y border-border">
-        <div className="container">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat) => (
-              <div key={stat.label} className="text-center">
-                <p className="text-3xl md:text-4xl font-bold text-primary">{stat.value}</p>
-                <p className="text-sm text-muted-foreground mt-1">{stat.label}</p>
-              </div>
-            ))}
-          </div>
+      {/* Stats Section with Glass Effect */}
+      <section className="py-16 relative overflow-hidden">
+        <Suspense fallback={null}>
+          <ParticleField className="opacity-30" />
+        </Suspense>
+        
+        <div className="container relative z-10">
+          <GlassCard className="p-8" hover={false}>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {stats.map((stat, index) => (
+                <AnimatedSection key={stat.label} delay={index * 0.1} direction="up">
+                  <div className="text-center">
+                    <AnimatedCounter 
+                      value={stat.value}
+                      className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary"
+                      delay={index * 0.1}
+                    />
+                    <p className="text-sm md:text-base text-muted-foreground mt-2">{stat.label}</p>
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
+          </GlassCard>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-background">
-        <div className="container">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Intelligent Traffic Forecasting
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-muted/30 to-transparent" />
+        
+        <div className="container relative z-10">
+          <AnimatedSection className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
+              Intelligent Traffic{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+                Forecasting
+              </span>
             </h2>
             <p className="text-lg text-muted-foreground">
               Our system combines multiple data sources and advanced algorithms to deliver 
               accurate traffic predictions for any scenario.
             </p>
-          </div>
+          </AnimatedSection>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((feature) => {
+            {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <Card key={feature.title} className="bg-card border-border hover:shadow-lg transition-shadow">
-                  <CardContent className="p-6">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 mb-4">
-                      <Icon className="h-6 w-6 text-primary" />
-                    </div>
-                    <h3 className="text-lg font-semibold text-foreground mb-2">{feature.title}</h3>
-                    <p className="text-sm text-muted-foreground">{feature.description}</p>
-                  </CardContent>
-                </Card>
+                <GlassCard 
+                  key={feature.title} 
+                  className="p-6" 
+                  glow 
+                  delay={index * 0.1}
+                >
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 mb-5">
+                    <Icon className="h-7 w-7 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-foreground mb-3">{feature.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+                </GlassCard>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section className="py-20 bg-muted/30">
+      {/* Benefits Section with 3D Car */}
+      <section className="py-24 relative overflow-hidden">
         <div className="container">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Why Choose TrafficTelligence?
-              </h2>
-              <p className="text-lg text-muted-foreground mb-8">
-                Built for urban planners, researchers, and smart city initiatives, our platform 
-                provides the insights needed to optimize traffic flow and reduce congestion.
-              </p>
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <ParallaxSection speed={0.3}>
+              <AnimatedSection>
+                <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
+                  Why Choose{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+                    TrafficTelligence?
+                  </span>
+                </h2>
+              </AnimatedSection>
+              
+              <AnimatedSection delay={0.1}>
+                <p className="text-lg text-muted-foreground mb-10 leading-relaxed">
+                  Built for urban planners, researchers, and smart city initiatives, our platform 
+                  provides the insights needed to optimize traffic flow and reduce congestion.
+                </p>
+              </AnimatedSection>
               
               <div className="space-y-6">
-                {benefits.map((benefit) => {
+                {benefits.map((benefit, index) => {
                   const Icon = benefit.icon;
                   return (
-                    <div key={benefit.title} className="flex gap-4">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary text-secondary-foreground">
-                        <Icon className="h-5 w-5" />
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-foreground">{benefit.title}</h4>
-                        <p className="text-sm text-muted-foreground">{benefit.description}</p>
-                      </div>
-                    </div>
+                    <AnimatedSection key={benefit.title} delay={0.2 + index * 0.1} direction="left">
+                      <GlassCard className="p-5 flex gap-5" hover>
+                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-secondary to-secondary/70 text-secondary-foreground">
+                          <Icon className="h-6 w-6" />
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-foreground text-lg">{benefit.title}</h4>
+                          <p className="text-muted-foreground">{benefit.description}</p>
+                        </div>
+                      </GlassCard>
+                    </AnimatedSection>
                   );
                 })}
               </div>
-            </div>
+            </ParallaxSection>
             
-            <Card className="bg-card border-border p-8">
-              <div className="space-y-6">
-                <div className="flex items-center justify-between p-4 rounded-lg bg-muted/50">
-                  <span className="text-muted-foreground">Prediction Accuracy</span>
-                  <span className="text-2xl font-bold text-primary">94.2%</span>
-                </div>
-                <div className="flex items-center justify-between p-4 rounded-lg bg-muted/50">
-                  <span className="text-muted-foreground">Response Time</span>
-                  <span className="text-2xl font-bold text-secondary">&lt;100ms</span>
-                </div>
-                <div className="flex items-center justify-between p-4 rounded-lg bg-muted/50">
-                  <span className="text-muted-foreground">Data Freshness</span>
-                  <span className="text-2xl font-bold text-primary">Real-time</span>
-                </div>
-                <Button asChild className="w-full mt-4">
-                  <Link to="/predict">
-                    Try It Now
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
+            <ScaleOnScroll className="hidden lg:block">
+              <div className="relative h-[500px]">
+                <Suspense fallback={<LoadingFallback />}>
+                  <FloatingCar />
+                </Suspense>
+                
+                {/* Stats overlay cards */}
+                <motion.div 
+                  className="absolute top-8 right-0"
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <GlassCard className="p-4 min-w-[180px]" hover={false}>
+                    <p className="text-xs text-muted-foreground">Prediction Accuracy</p>
+                    <p className="text-2xl font-bold text-primary">94.2%</p>
+                  </GlassCard>
+                </motion.div>
+                
+                <motion.div 
+                  className="absolute bottom-20 left-0"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.7 }}
+                >
+                  <GlassCard className="p-4 min-w-[160px]" hover={false}>
+                    <p className="text-xs text-muted-foreground">Response Time</p>
+                    <p className="text-2xl font-bold text-secondary">&lt;100ms</p>
+                  </GlassCard>
+                </motion.div>
+                
+                <motion.div 
+                  className="absolute bottom-8 right-8"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.9 }}
+                >
+                  <GlassCard className="p-4 min-w-[160px]" hover={false}>
+                    <p className="text-xs text-muted-foreground">Data Freshness</p>
+                    <p className="text-2xl font-bold text-primary">Real-time</p>
+                  </GlassCard>
+                </motion.div>
               </div>
-            </Card>
+            </ScaleOnScroll>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-primary">
-        <div className="container text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
-            Ready to Predict Traffic?
-          </h2>
-          <p className="text-lg text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
-            Start making data-driven decisions with our ML-powered traffic prediction system.
-          </p>
-          <Button asChild size="lg" variant="secondary" className="text-lg px-8">
-            <Link to="/predict">
-              Get Started
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-          </Button>
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80" />
+        
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          {!shouldReduceMotion && (
+            <>
+              <motion.div 
+                className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-white/10 blur-3xl"
+                animate={{ 
+                  x: [0, 50, 0],
+                  y: [0, -30, 0],
+                }}
+                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <motion.div 
+                className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-secondary/20 blur-3xl"
+                animate={{ 
+                  x: [0, -50, 0],
+                  y: [0, 30, 0],
+                }}
+                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </>
+          )}
+        </div>
+        
+        <div className="container relative z-10 text-center">
+          <AnimatedSection>
+            <h2 className="text-3xl md:text-5xl font-bold text-primary-foreground mb-6">
+              Ready to Predict Traffic?
+            </h2>
+          </AnimatedSection>
+          
+          <AnimatedSection delay={0.1}>
+            <p className="text-lg text-primary-foreground/80 mb-10 max-w-2xl mx-auto">
+              Start making data-driven decisions with our ML-powered traffic prediction system.
+            </p>
+          </AnimatedSection>
+          
+          <AnimatedSection delay={0.2}>
+            <motion.div
+              whileHover={shouldReduceMotion ? undefined : { scale: 1.05 }}
+              whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
+              className="inline-block"
+            >
+              <Button asChild size="lg" variant="secondary" className="text-lg px-10 py-6 rounded-xl shadow-xl">
+                <Link to="/predict">
+                  Get Started
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+              </Button>
+            </motion.div>
+          </AnimatedSection>
         </div>
       </section>
     </Layout>
