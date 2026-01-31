@@ -3,15 +3,16 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { format } from 'date-fns';
-import { CalendarIcon, Loader2 } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { CalendarIcon, Loader2, Cloud, Clock, Calendar as CalendarIcon2, Thermometer, Droplets, Snowflake } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { GlassCard } from '@/components/animations/GlassCard';
 import { WEATHER_CONDITIONS, type PredictionInput } from '@/lib/api';
 import { cn } from '@/lib/utils';
 
@@ -40,6 +41,7 @@ const timeSlots = Array.from({ length: 24 }, (_, i) => {
 
 export function PredictionForm({ onSubmit, isLoading }: PredictionFormProps) {
   const [date, setDate] = useState<Date>();
+  const shouldReduceMotion = useReducedMotion();
 
   const {
     register,
@@ -86,68 +88,118 @@ export function PredictionForm({ onSubmit, isLoading }: PredictionFormProps) {
   };
 
   return (
-    <Card className="border-border shadow-lg">
-      <CardHeader>
-        <CardTitle className="text-2xl">Traffic Prediction</CardTitle>
-        <CardDescription>
-          Enter weather and time parameters to predict traffic volume
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-6">
+    <GlassCard className="overflow-visible" hover={false}>
+      <div className="p-6 md:p-8">
+        <div className="flex items-center gap-3 mb-6">
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/70">
+            <Cloud className="h-6 w-6 text-primary-foreground" />
+          </div>
+          <div>
+            <h2 className="text-2xl font-bold text-foreground">Traffic Prediction</h2>
+            <p className="text-muted-foreground">Enter weather and time parameters</p>
+          </div>
+        </div>
+        
+        <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-8">
           {/* Weather Inputs */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-foreground">Weather Conditions</h3>
+            <div className="flex items-center gap-2">
+              <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Cloud className="h-4 w-4 text-primary" />
+              </div>
+              <h3 className="text-lg font-semibold text-foreground">Weather Conditions</h3>
+            </div>
+            
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="temperature">Temperature (°C)</Label>
+              <motion.div 
+                className="space-y-2"
+                whileHover={shouldReduceMotion ? undefined : { scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Label htmlFor="temperature" className="flex items-center gap-2">
+                  <Thermometer className="h-4 w-4 text-destructive" />
+                  Temperature (°C)
+                </Label>
                 <Input
                   id="temperature"
                   type="number"
                   step="0.1"
                   {...register('temperature', { valueAsNumber: true })}
-                  className={errors.temperature ? 'border-destructive' : ''}
+                  className={cn(
+                    "bg-background/50 backdrop-blur-sm border-border/50 focus:border-primary transition-colors",
+                    errors.temperature && 'border-destructive'
+                  )}
                 />
                 {errors.temperature && (
                   <p className="text-sm text-destructive">{errors.temperature.message}</p>
                 )}
-              </div>
+              </motion.div>
 
-              <div className="space-y-2">
-                <Label htmlFor="rainfall">Rainfall (mm)</Label>
+              <motion.div 
+                className="space-y-2"
+                whileHover={shouldReduceMotion ? undefined : { scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Label htmlFor="rainfall" className="flex items-center gap-2">
+                  <Droplets className="h-4 w-4 text-info" />
+                  Rainfall (mm)
+                </Label>
                 <Input
                   id="rainfall"
                   type="number"
                   step="0.1"
                   {...register('rainfall', { valueAsNumber: true })}
-                  className={errors.rainfall ? 'border-destructive' : ''}
+                  className={cn(
+                    "bg-background/50 backdrop-blur-sm border-border/50 focus:border-primary transition-colors",
+                    errors.rainfall && 'border-destructive'
+                  )}
                 />
                 {errors.rainfall && (
                   <p className="text-sm text-destructive">{errors.rainfall.message}</p>
                 )}
-              </div>
+              </motion.div>
 
-              <div className="space-y-2">
-                <Label htmlFor="snowfall">Snowfall (cm)</Label>
+              <motion.div 
+                className="space-y-2"
+                whileHover={shouldReduceMotion ? undefined : { scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Label htmlFor="snowfall" className="flex items-center gap-2">
+                  <Snowflake className="h-4 w-4 text-secondary" />
+                  Snowfall (cm)
+                </Label>
                 <Input
                   id="snowfall"
                   type="number"
                   step="0.1"
                   {...register('snowfall', { valueAsNumber: true })}
-                  className={errors.snowfall ? 'border-destructive' : ''}
+                  className={cn(
+                    "bg-background/50 backdrop-blur-sm border-border/50 focus:border-primary transition-colors",
+                    errors.snowfall && 'border-destructive'
+                  )}
                 />
                 {errors.snowfall && (
                   <p className="text-sm text-destructive">{errors.snowfall.message}</p>
                 )}
-              </div>
+              </motion.div>
 
-              <div className="space-y-2">
-                <Label>Weather Condition</Label>
+              <motion.div 
+                className="space-y-2"
+                whileHover={shouldReduceMotion ? undefined : { scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Label className="flex items-center gap-2">
+                  <Cloud className="h-4 w-4 text-muted-foreground" />
+                  Weather Condition
+                </Label>
                 <Select onValueChange={(value) => setValue('weather_condition', value)}>
-                  <SelectTrigger className={errors.weather_condition ? 'border-destructive' : ''}>
+                  <SelectTrigger className={cn(
+                    "bg-background/50 backdrop-blur-sm border-border/50",
+                    errors.weather_condition && 'border-destructive'
+                  )}>
                     <SelectValue placeholder="Select condition" />
                   </SelectTrigger>
-                  <SelectContent className="bg-popover">
+                  <SelectContent className="bg-popover/95 backdrop-blur-xl border-border/50">
                     {WEATHER_CONDITIONS.map((condition) => (
                       <SelectItem key={condition} value={condition}>
                         {condition}
@@ -158,22 +210,35 @@ export function PredictionForm({ onSubmit, isLoading }: PredictionFormProps) {
                 {errors.weather_condition && (
                   <p className="text-sm text-destructive">{errors.weather_condition.message}</p>
                 )}
-              </div>
+              </motion.div>
             </div>
           </div>
 
           {/* Time Inputs */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-foreground">Date & Time</h3>
+            <div className="flex items-center gap-2">
+              <div className="h-8 w-8 rounded-lg bg-secondary/10 flex items-center justify-center">
+                <Clock className="h-4 w-4 text-secondary" />
+              </div>
+              <h3 className="text-lg font-semibold text-foreground">Date & Time</h3>
+            </div>
+            
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="space-y-2">
-                <Label>Date</Label>
+              <motion.div 
+                className="space-y-2"
+                whileHover={shouldReduceMotion ? undefined : { scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Label className="flex items-center gap-2">
+                  <CalendarIcon2 className="h-4 w-4 text-primary" />
+                  Date
+                </Label>
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
                       variant="outline"
                       className={cn(
-                        'w-full justify-start text-left font-normal',
+                        'w-full justify-start text-left font-normal bg-background/50 backdrop-blur-sm border-border/50 hover:bg-background/70',
                         !date && 'text-muted-foreground',
                         errors.date && 'border-destructive'
                       )}
@@ -182,7 +247,7 @@ export function PredictionForm({ onSubmit, isLoading }: PredictionFormProps) {
                       {date ? format(date, 'PPP') : 'Pick a date'}
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0 bg-popover" align="start">
+                  <PopoverContent className="w-auto p-0 bg-popover/95 backdrop-blur-xl border-border/50" align="start">
                     <Calendar
                       mode="single"
                       selected={date}
@@ -198,15 +263,25 @@ export function PredictionForm({ onSubmit, isLoading }: PredictionFormProps) {
                 {errors.date && (
                   <p className="text-sm text-destructive">{errors.date.message}</p>
                 )}
-              </div>
+              </motion.div>
 
-              <div className="space-y-2">
-                <Label>Time</Label>
+              <motion.div 
+                className="space-y-2"
+                whileHover={shouldReduceMotion ? undefined : { scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Label className="flex items-center gap-2">
+                  <Clock className="h-4 w-4 text-secondary" />
+                  Time
+                </Label>
                 <Select onValueChange={(value) => setValue('time', value)}>
-                  <SelectTrigger className={errors.time ? 'border-destructive' : ''}>
+                  <SelectTrigger className={cn(
+                    "bg-background/50 backdrop-blur-sm border-border/50",
+                    errors.time && 'border-destructive'
+                  )}>
                     <SelectValue placeholder="Select time" />
                   </SelectTrigger>
-                  <SelectContent className="bg-popover max-h-60">
+                  <SelectContent className="bg-popover/95 backdrop-blur-xl border-border/50 max-h-60">
                     {timeSlots.map((time) => (
                       <SelectItem key={time} value={time}>
                         {time}
@@ -217,21 +292,29 @@ export function PredictionForm({ onSubmit, isLoading }: PredictionFormProps) {
                 {errors.time && (
                   <p className="text-sm text-destructive">{errors.time.message}</p>
                 )}
-              </div>
+              </motion.div>
 
-              <div className="space-y-2">
+              <motion.div 
+                className="space-y-2"
+                whileHover={shouldReduceMotion ? undefined : { scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+              >
                 <Label>Day</Label>
                 <Input 
                   value={date ? format(date, 'EEEE') : ''} 
                   disabled 
                   placeholder="Auto-filled"
-                  className="bg-muted"
+                  className="bg-muted/50 border-border/50"
                 />
-              </div>
+              </motion.div>
 
-              <div className="flex items-center justify-between p-4 rounded-lg border border-border bg-muted/50">
+              <motion.div
+                className="flex items-center justify-between p-4 rounded-xl border border-border/50 bg-gradient-to-br from-warning/5 to-warning/10 backdrop-blur-sm"
+                whileHover={shouldReduceMotion ? undefined : { scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+              >
                 <div className="space-y-0.5">
-                  <Label htmlFor="peak-hour">Peak Hour</Label>
+                  <Label htmlFor="peak-hour" className="font-medium">Peak Hour</Label>
                   <p className="text-xs text-muted-foreground">Rush hour traffic</p>
                 </div>
                 <Switch
@@ -239,16 +322,26 @@ export function PredictionForm({ onSubmit, isLoading }: PredictionFormProps) {
                   checked={isPeakHour}
                   onCheckedChange={(checked) => setValue('is_peak_hour', checked)}
                 />
-              </div>
+              </motion.div>
             </div>
           </div>
 
           {/* Other Inputs */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-foreground">Additional Factors</h3>
-            <div className="flex items-center justify-between p-4 rounded-lg border border-border bg-muted/50 max-w-xs">
+            <div className="flex items-center gap-2">
+              <div className="h-8 w-8 rounded-lg bg-info/10 flex items-center justify-center">
+                <CalendarIcon2 className="h-4 w-4 text-info" />
+              </div>
+              <h3 className="text-lg font-semibold text-foreground">Additional Factors</h3>
+            </div>
+            
+            <motion.div 
+              className="flex items-center justify-between p-4 rounded-xl border border-border/50 bg-gradient-to-br from-secondary/5 to-secondary/10 backdrop-blur-sm max-w-xs"
+              whileHover={shouldReduceMotion ? undefined : { scale: 1.02 }}
+              transition={{ duration: 0.2 }}
+            >
               <div className="space-y-0.5">
-                <Label htmlFor="holiday">Holiday</Label>
+                <Label htmlFor="holiday" className="font-medium">Holiday</Label>
                 <p className="text-xs text-muted-foreground">Is it a public holiday?</p>
               </div>
               <Switch
@@ -256,27 +349,49 @@ export function PredictionForm({ onSubmit, isLoading }: PredictionFormProps) {
                 checked={isHoliday}
                 onCheckedChange={(checked) => setValue('is_holiday', checked)}
               />
-            </div>
+            </motion.div>
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 pt-4">
-            <Button type="submit" disabled={isLoading} className="flex-1">
-              {isLoading ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Predicting...
-                </>
-              ) : (
-                'Predict Traffic'
-              )}
-            </Button>
-            <Button type="button" variant="outline" onClick={handleReset} className="flex-1">
-              Reset Form
-            </Button>
+          <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <motion.div
+              className="flex-1"
+              whileHover={shouldReduceMotion ? undefined : { scale: 1.02, y: -2 }}
+              whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
+            >
+              <Button 
+                type="submit" 
+                disabled={isLoading} 
+                className="w-full py-6 text-lg rounded-xl bg-gradient-to-r from-primary to-primary/90 shadow-lg shadow-primary/25"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    Predicting...
+                  </>
+                ) : (
+                  'Predict Traffic'
+                )}
+              </Button>
+            </motion.div>
+            
+            <motion.div
+              className="flex-1"
+              whileHover={shouldReduceMotion ? undefined : { scale: 1.02, y: -2 }}
+              whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
+            >
+              <Button 
+                type="button" 
+                variant="outline" 
+                onClick={handleReset} 
+                className="w-full py-6 text-lg rounded-xl bg-background/50 backdrop-blur-sm border-border/50"
+              >
+                Reset Form
+              </Button>
+            </motion.div>
           </div>
         </form>
-      </CardContent>
-    </Card>
+      </div>
+    </GlassCard>
   );
 }
