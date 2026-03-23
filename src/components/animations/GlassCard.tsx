@@ -10,29 +10,26 @@ interface GlassCardProps {
   delay?: number;
 }
 
-export function GlassCard({ 
-  children, 
-  className = '', 
-  hover = true, 
+export function GlassCard({
+  children,
+  className = '',
+  hover = true,
   glow = false,
   delay = 0
 }: GlassCardProps) {
   const shouldReduceMotion = useReducedMotion();
-  
+
   const baseClasses = cn(
-    "relative overflow-hidden rounded-2xl",
-    "bg-card/60 dark:bg-card/40",
-    "backdrop-blur-xl backdrop-saturate-150",
+    "bg-card text-card-foreground",
     "border border-border/50",
-    "shadow-lg",
-    glow && "before:absolute before:inset-0 before:bg-gradient-to-br before:from-primary/10 before:via-transparent before:to-secondary/10 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500",
+    "shadow-sm hover:shadow-md transition-shadow duration-200",
     className
   );
-  
+
   if (shouldReduceMotion) {
     return <div className={baseClasses}>{children}</div>;
   }
-  
+
   return (
     <motion.div
       className={baseClasses}
@@ -40,8 +37,8 @@ export function GlassCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-30px" }}
       transition={{ duration: 0.5, delay }}
-      whileHover={hover ? { 
-        scale: 1.02, 
+      whileHover={hover ? {
+        scale: 1.02,
         y: -5,
         transition: { duration: 0.2 }
       } : undefined}
@@ -60,7 +57,7 @@ interface GlassButtonProps {
 
 export function GlassButton({ children, className = '', onClick, disabled }: GlassButtonProps) {
   const shouldReduceMotion = useReducedMotion();
-  
+
   const baseClasses = cn(
     "relative px-6 py-3 rounded-xl font-medium",
     "bg-primary/90 text-primary-foreground",
@@ -72,7 +69,7 @@ export function GlassButton({ children, className = '', onClick, disabled }: Gla
     disabled && "opacity-50 cursor-not-allowed",
     className
   );
-  
+
   if (shouldReduceMotion) {
     return (
       <button className={baseClasses} onClick={onClick} disabled={disabled}>
@@ -80,7 +77,7 @@ export function GlassButton({ children, className = '', onClick, disabled }: Gla
       </button>
     );
   }
-  
+
   return (
     <motion.button
       className={baseClasses}
@@ -108,22 +105,22 @@ interface FloatingElementProps {
   amplitude?: number;
 }
 
-export function FloatingElement({ 
-  children, 
-  className = '', 
+export function FloatingElement({
+  children,
+  className = '',
   delay = 0,
   amplitude = 10
 }: FloatingElementProps) {
   const shouldReduceMotion = useReducedMotion();
-  
+
   if (shouldReduceMotion) {
     return <div className={className}>{children}</div>;
   }
-  
+
   return (
     <motion.div
       className={className}
-      animate={{ 
+      animate={{
         y: [0, -amplitude, 0],
       }}
       transition={{

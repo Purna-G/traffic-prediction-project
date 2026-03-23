@@ -4,15 +4,15 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import { 
-  Car, 
-  Menu, 
-  Home, 
-  TrendingUp, 
-  BarChart3, 
-  History, 
-  Cpu, 
-  Info 
+import {
+  Car,
+  Menu,
+  Home,
+  TrendingUp,
+  BarChart3,
+  History,
+  Cpu,
+  Info
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -35,17 +35,17 @@ export function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
-    
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <motion.header 
+    <motion.header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled 
-          ? "bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-sm" 
+        scrolled
+          ? "bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-sm"
           : "bg-transparent"
       )}
       initial={{ y: -100 }}
@@ -54,7 +54,7 @@ export function Navbar() {
     >
       <div className="container flex h-16 lg:h-20 items-center justify-between">
         <Link to="/" className="flex items-center gap-3 group">
-          <motion.div 
+          <motion.div
             className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/80 shadow-lg shadow-primary/20"
             whileHover={shouldReduceMotion ? undefined : { scale: 1.1, rotate: 5 }}
             transition={{ type: "spring", stiffness: 400 }}
@@ -67,7 +67,7 @@ export function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-1 bg-muted/50 backdrop-blur-sm rounded-full px-2 py-1.5 border border-border/50">
+        <nav className="hidden md:flex items-center gap-1 bg-background px-2 py-1.5 border border-border/50 rounded-full">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = location.pathname === item.path;
@@ -80,8 +80,8 @@ export function Navbar() {
                 <motion.div
                   className={cn(
                     "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-colors",
-                    isActive 
-                      ? "text-primary-foreground" 
+                    isActive
+                      ? "text-primary-foreground"
                       : "text-muted-foreground hover:text-foreground"
                   )}
                   whileHover={shouldReduceMotion ? undefined : { scale: 1.05 }}
@@ -106,7 +106,7 @@ export function Navbar() {
 
         <div className="flex items-center gap-3">
           <ThemeToggle />
-          
+
           {/* Mobile Navigation */}
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild className="md:hidden">
@@ -139,8 +139,8 @@ export function Navbar() {
                           onClick={() => setOpen(false)}
                           className={cn(
                             "flex items-center gap-4 px-4 py-3.5 rounded-xl text-base font-medium transition-all",
-                            isActive 
-                              ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20" 
+                            isActive
+                              ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20"
                               : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                           )}
                         >

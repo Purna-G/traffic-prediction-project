@@ -8,7 +8,7 @@ interface LayoutProps {
 
 export function Layout({ children }: LayoutProps) {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative selection:bg-primary/10 selection:text-primary">
       <Navbar />
       <motion.main
         initial={{ opacity: 0 }}
@@ -21,7 +21,7 @@ export function Layout({ children }: LayoutProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
         <div className="container relative py-10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <motion.p 
+            <motion.p
               className="text-sm text-muted-foreground"
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -29,7 +29,7 @@ export function Layout({ children }: LayoutProps) {
             >
               © {new Date().getFullYear()} TrafficTelligence. All rights reserved.
             </motion.p>
-            <motion.p 
+            <motion.p
               className="text-sm text-muted-foreground"
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}

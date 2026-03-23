@@ -6,11 +6,11 @@ import { Layout } from '@/components/layout/Layout';
 import { AnimatedSection, AnimatedCounter } from '@/components/animations/AnimatedSection';
 import { GlassCard } from '@/components/animations/GlassCard';
 import { ParallaxSection, ScaleOnScroll } from '@/components/animations/ParallaxSection';
-import { 
-  TrendingUp, 
-  BarChart3, 
-  Clock, 
-  Cloud, 
+import {
+  TrendingUp,
+  BarChart3,
+  Clock,
+  Cloud,
   Cpu,
   ArrowRight,
   Zap,
@@ -19,10 +19,7 @@ import {
   Sparkles
 } from 'lucide-react';
 
-// Lazy load 3D components for performance
-const TrafficScene = lazy(() => import('@/components/3d/TrafficScene').then(m => ({ default: m.TrafficScene })));
-const FloatingCar = lazy(() => import('@/components/3d/FloatingCar').then(m => ({ default: m.FloatingCar })));
-const ParticleField = lazy(() => import('@/components/3d/ParticleField').then(m => ({ default: m.ParticleField })));
+// 3D components removed as per new design direction
 
 const features = [
   {
@@ -87,20 +84,13 @@ export default function Index() {
     <Layout>
       {/* Hero Section with 3D Scene */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        {/* 3D Traffic Scene Background */}
-        <Suspense fallback={<LoadingFallback />}>
-          <div className="absolute inset-0 z-0">
-            <TrafficScene />
-          </div>
-        </Suspense>
-        
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 z-[1] bg-gradient-to-b from-background/70 via-background/50 to-background" />
-        
+        {/* Minimalist Background */}
+        <div className="absolute inset-0 z-0 bg-background" />
+
         <div className="container relative z-10 py-20 lg:py-32">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <AnimatedSection delay={0.1}>
-              <motion.div 
+              <motion.div
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 dark:bg-primary/20 border border-primary/20 backdrop-blur-sm text-primary text-sm font-medium"
                 whileHover={shouldReduceMotion ? undefined : { scale: 1.05 }}
               >
@@ -108,30 +98,30 @@ export default function Index() {
                 ML-Powered Traffic Intelligence
               </motion.div>
             </AnimatedSection>
-            
+
             <AnimatedSection delay={0.2}>
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-foreground leading-tight tracking-tight">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight tracking-tight">
                 Predict Traffic Volume with{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-secondary">
+                <span className="text-primary italic">
                   AI Precision
                 </span>
               </h1>
             </AnimatedSection>
-            
+
             <AnimatedSection delay={0.3}>
               <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                Harness the power of machine learning to forecast traffic patterns based on weather, 
+                Harness the power of machine learning to forecast traffic patterns based on weather,
                 time, and historical data. Make smarter urban planning decisions.
               </p>
             </AnimatedSection>
-            
+
             <AnimatedSection delay={0.4}>
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
                 <motion.div
                   whileHover={shouldReduceMotion ? undefined : { scale: 1.05, y: -2 }}
                   whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
                 >
-                  <Button asChild size="lg" className="text-lg px-8 py-6 rounded-xl shadow-lg shadow-primary/25 bg-gradient-to-r from-primary to-primary/90">
+                  <Button asChild size="lg" className="text-lg px-8 py-6 rounded-full shadow-none bg-primary text-primary-foreground hover:bg-primary/90">
                     <Link to="/predict">
                       <TrendingUp className="mr-2 h-5 w-5" />
                       Start Predicting
@@ -139,12 +129,12 @@ export default function Index() {
                     </Link>
                   </Button>
                 </motion.div>
-                
+
                 <motion.div
                   whileHover={shouldReduceMotion ? undefined : { scale: 1.05, y: -2 }}
                   whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
                 >
-                  <Button asChild variant="outline" size="lg" className="text-lg px-8 py-6 rounded-xl backdrop-blur-sm bg-background/50 border-border/50">
+                  <Button asChild variant="outline" size="lg" className="text-lg px-8 py-6 rounded-full bg-transparent border-input hover:bg-muted">
                     <Link to="/analytics">
                       <BarChart3 className="mr-2 h-5 w-5" />
                       View Analytics
@@ -155,15 +145,15 @@ export default function Index() {
             </AnimatedSection>
           </div>
         </div>
-        
+
         {/* Scroll Indicator */}
-        <motion.div 
+        <motion.div
           className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
           animate={shouldReduceMotion ? undefined : { y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
           <div className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex justify-center pt-2">
-            <motion.div 
+            <motion.div
               className="w-1.5 h-3 rounded-full bg-primary"
               animate={shouldReduceMotion ? undefined : { y: [0, 12, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
@@ -172,19 +162,16 @@ export default function Index() {
         </motion.div>
       </section>
 
-      {/* Stats Section with Glass Effect */}
-      <section className="py-16 relative overflow-hidden">
-        <Suspense fallback={null}>
-          <ParticleField className="opacity-30" />
-        </Suspense>
-        
+      {/* Stats Section */}
+      <section className="py-16 relative overflow-hidden bg-muted/30">
+
         <div className="container relative z-10">
           <GlassCard className="p-8" hover={false}>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {stats.map((stat, index) => (
                 <AnimatedSection key={stat.label} delay={index * 0.1} direction="up">
                   <div className="text-center">
-                    <AnimatedCounter 
+                    <AnimatedCounter
                       value={stat.value}
                       className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary"
                       delay={index * 0.1}
@@ -201,29 +188,29 @@ export default function Index() {
       {/* Features Section */}
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-muted/30 to-transparent" />
-        
+
         <div className="container relative z-10">
           <AnimatedSection className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
               Intelligent Traffic{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+              <span className="text-primary">
                 Forecasting
               </span>
             </h2>
             <p className="text-lg text-muted-foreground">
-              Our system combines multiple data sources and advanced algorithms to deliver 
+              Our system combines multiple data sources and advanced algorithms to deliver
               accurate traffic predictions for any scenario.
             </p>
           </AnimatedSection>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <GlassCard 
-                  key={feature.title} 
-                  className="p-6" 
-                  glow 
+                <GlassCard
+                  key={feature.title}
+                  className="p-6"
+                  glow
                   delay={index * 0.1}
                 >
                   <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 mb-5">
@@ -246,19 +233,19 @@ export default function Index() {
               <AnimatedSection>
                 <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
                   Why Choose{' '}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+                  <span className="text-primary">
                     TrafficTelligence?
                   </span>
                 </h2>
               </AnimatedSection>
-              
+
               <AnimatedSection delay={0.1}>
                 <p className="text-lg text-muted-foreground mb-10 leading-relaxed">
-                  Built for urban planners, researchers, and smart city initiatives, our platform 
+                  Built for urban planners, researchers, and smart city initiatives, our platform
                   provides the insights needed to optimize traffic flow and reduce congestion.
                 </p>
               </AnimatedSection>
-              
+
               <div className="space-y-6">
                 {benefits.map((benefit, index) => {
                   const Icon = benefit.icon;
@@ -278,15 +265,20 @@ export default function Index() {
                 })}
               </div>
             </ParallaxSection>
-            
+
             <ScaleOnScroll className="hidden lg:block">
-              <div className="relative h-[500px]">
-                <Suspense fallback={<LoadingFallback />}>
-                  <FloatingCar />
-                </Suspense>
-                
+              <div className="relative h-[500px] flex items-center justify-center bg-muted/20 rounded-3xl">
+                {/* Abstract Visual Representation */}
+                <div className="relative w-[400px] h-[400px] flex items-center justify-center">
+                  <div className="w-64 h-64 rounded-full border border-border flex items-center justify-center">
+                    <div className="w-48 h-48 rounded-full border border-border/50 flex items-center justify-center">
+                      <div className="w-32 h-32 rounded-full bg-primary/5" />
+                    </div>
+                  </div>
+                </div>
+
                 {/* Stats overlay cards */}
-                <motion.div 
+                <motion.div
                   className="absolute top-8 right-0"
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -298,8 +290,8 @@ export default function Index() {
                     <p className="text-2xl font-bold text-primary">94.2%</p>
                   </GlassCard>
                 </motion.div>
-                
-                <motion.div 
+
+                <motion.div
                   className="absolute bottom-20 left-0"
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -311,8 +303,8 @@ export default function Index() {
                     <p className="text-2xl font-bold text-secondary">&lt;100ms</p>
                   </GlassCard>
                 </motion.div>
-                
-                <motion.div 
+
+                <motion.div
                   className="absolute bottom-8 right-8"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -331,46 +323,21 @@ export default function Index() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80" />
-        
-        {/* Animated background elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          {!shouldReduceMotion && (
-            <>
-              <motion.div 
-                className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-white/10 blur-3xl"
-                animate={{ 
-                  x: [0, 50, 0],
-                  y: [0, -30, 0],
-                }}
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-              />
-              <motion.div 
-                className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-secondary/20 blur-3xl"
-                animate={{ 
-                  x: [0, -50, 0],
-                  y: [0, 30, 0],
-                }}
-                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-              />
-            </>
-          )}
-        </div>
-        
+      <section className="py-24 relative overflow-hidden bg-primary text-primary-foreground">
+
         <div className="container relative z-10 text-center">
           <AnimatedSection>
             <h2 className="text-3xl md:text-5xl font-bold text-primary-foreground mb-6">
               Ready to Predict Traffic?
             </h2>
           </AnimatedSection>
-          
+
           <AnimatedSection delay={0.1}>
             <p className="text-lg text-primary-foreground/80 mb-10 max-w-2xl mx-auto">
               Start making data-driven decisions with our ML-powered traffic prediction system.
             </p>
           </AnimatedSection>
-          
+
           <AnimatedSection delay={0.2}>
             <motion.div
               whileHover={shouldReduceMotion ? undefined : { scale: 1.05 }}

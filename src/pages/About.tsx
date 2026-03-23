@@ -5,12 +5,12 @@ import { Badge } from '@/components/ui/badge';
 import { GlassCard } from '@/components/animations/GlassCard';
 import { AnimatedSection } from '@/components/animations/AnimatedSection';
 import { ParallaxSection } from '@/components/animations/ParallaxSection';
-import { 
-  Car, 
-  Code, 
-  Database, 
-  Brain, 
-  Cloud, 
+import {
+  Car,
+  Code,
+  Database,
+  Brain,
+  Cloud,
   Building2,
   GraduationCap,
   Users,
@@ -19,8 +19,7 @@ import {
   Leaf
 } from 'lucide-react';
 
-const ParticleField = lazy(() => import('@/components/3d/ParticleField').then(m => ({ default: m.ParticleField })));
-const FloatingCar = lazy(() => import('@/components/3d/FloatingCar').then(m => ({ default: m.FloatingCar })));
+// 3D components removed
 
 const techStack = [
   { name: 'React', category: 'Frontend', color: 'from-primary/20 to-primary/10' },
@@ -73,28 +72,26 @@ export default function About() {
     <Layout>
       {/* Hero Section */}
       <section className="relative pt-24 pb-16 overflow-hidden">
-        <Suspense fallback={null}>
-          <ParticleField className="opacity-20" />
-        </Suspense>
-        
+        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-10 [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+
         <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
-        
+
         <div className="container relative z-10">
           <AnimatedSection className="text-center max-w-3xl mx-auto">
-            <motion.div 
+            <motion.div
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm text-primary text-sm font-medium mb-6"
               whileHover={shouldReduceMotion ? undefined : { scale: 1.05 }}
             >
               <Sparkles className="h-4 w-4" />
               About the Project
             </motion.div>
-            
+
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
               Traffic<span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Telligence</span>
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              TrafficTelligence is an intelligent traffic volume prediction system that leverages 
-              machine learning to forecast traffic patterns based on weather conditions, time factors, 
+              TrafficTelligence is an intelligent traffic volume prediction system that leverages
+              machine learning to forecast traffic patterns based on weather conditions, time factors,
               and historical data. Built for smart city applications and urban planning research.
             </p>
           </AnimatedSection>
@@ -108,7 +105,7 @@ export default function About() {
             <GlassCard className="mb-12" glow>
               <div className="p-8 md:p-10">
                 <div className="flex flex-col md:flex-row items-start gap-6">
-                  <motion.div 
+                  <motion.div
                     className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-primary/70 shadow-lg shadow-primary/25"
                     animate={shouldReduceMotion ? undefined : { rotate: [0, 5, -5, 0] }}
                     transition={{ duration: 4, repeat: Infinity }}
@@ -118,10 +115,10 @@ export default function About() {
                   <div>
                     <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Project Purpose</h2>
                     <p className="text-muted-foreground leading-relaxed text-lg">
-                      This project was developed to demonstrate the application of machine learning in 
-                      urban traffic management. By analyzing multiple factors including weather conditions, 
-                      time of day, day of week, and special events like holidays, our system provides 
-                      accurate traffic volume predictions that can help city planners, commuters, and 
+                      This project was developed to demonstrate the application of machine learning in
+                      urban traffic management. By analyzing multiple factors including weather conditions,
+                      time of day, day of week, and special events like holidays, our system provides
+                      accurate traffic volume predictions that can help city planners, commuters, and
                       transportation authorities make informed decisions.
                     </p>
                   </div>
@@ -139,7 +136,7 @@ export default function About() {
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold text-foreground">Technology Stack</h2>
               </div>
-              
+
               <div className="flex flex-wrap gap-3">
                 {techStack.map((tech, index) => (
                   <motion.div
@@ -150,8 +147,8 @@ export default function About() {
                     transition={{ delay: index * 0.05 }}
                     whileHover={shouldReduceMotion ? undefined : { scale: 1.1, y: -2 }}
                   >
-                    <Badge 
-                      variant="outline" 
+                    <Badge
+                      variant="outline"
                       className={`px-5 py-2.5 text-base font-medium bg-gradient-to-br ${tech.color} border-border/50 backdrop-blur-sm`}
                     >
                       {tech.name}
@@ -174,12 +171,12 @@ export default function About() {
                     </div>
                     <h2 className="text-2xl font-bold text-foreground">Machine Learning Models</h2>
                   </div>
-                  
+
                   <p className="text-muted-foreground leading-relaxed mb-6">
-                    Our prediction system employs multiple machine learning algorithms to ensure 
+                    Our prediction system employs multiple machine learning algorithms to ensure
                     accuracy and reliability:
                   </p>
-                  
+
                   <ul className="space-y-4">
                     {[
                       { name: 'Random Forest', desc: 'Ensemble method achieving 94.2% accuracy', icon: Cpu },
@@ -187,7 +184,7 @@ export default function About() {
                       { name: 'Neural Networks', desc: 'Deep learning for complex pattern recognition', icon: Brain },
                       { name: 'Linear Regression', desc: 'Baseline model for comparison', icon: Cpu },
                     ].map((item, index) => (
-                      <motion.li 
+                      <motion.li
                         key={item.name}
                         className="flex items-center gap-3 p-3 rounded-xl bg-gradient-to-r from-muted/30 to-transparent border border-border/30"
                         initial={{ opacity: 0, x: -20 }}
@@ -209,12 +206,16 @@ export default function About() {
                 </div>
               </GlassCard>
             </AnimatedSection>
-            
+
             <ParallaxSection speed={0.2} className="hidden lg:block">
               <div className="h-[400px] relative">
-                <Suspense fallback={<LoadingFallback />}>
-                  <FloatingCar />
-                </Suspense>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-64 h-64 rounded-full border border-primary/20 bg-background/10 backdrop-blur-xl flex items-center justify-center shadow-2xl shadow-primary/20">
+                    <div className="w-48 h-48 rounded-full border border-secondary/20 bg-background/20 backdrop-blur-md flex items-center justify-center">
+                      <div className="w-32 h-32 rounded-full bg-primary/5" />
+                    </div>
+                  </div>
+                </div>
               </div>
             </ParallaxSection>
           </div>
@@ -228,7 +229,7 @@ export default function About() {
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold text-foreground">Smart City Benefits</h2>
               </div>
-              
+
               <div className="grid md:grid-cols-2 gap-6">
                 {benefits.map((benefit, index) => {
                   const Icon = benefit.icon;
@@ -236,7 +237,7 @@ export default function About() {
                     <GlassCard key={benefit.title} delay={index * 0.1} glow>
                       <div className="p-6">
                         <div className="flex items-start gap-4">
-                          <motion.div 
+                          <motion.div
                             className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-muted to-muted/50"
                             whileHover={shouldReduceMotion ? undefined : { rotate: 10, scale: 1.1 }}
                           >
@@ -266,9 +267,9 @@ export default function About() {
                   <div>
                     <h2 className="text-2xl font-bold text-foreground mb-4">Data Sources</h2>
                     <p className="text-muted-foreground leading-relaxed text-lg">
-                      The system is trained on comprehensive datasets including historical traffic counts, 
-                      weather data from meteorological services, calendar information for holidays and 
-                      events, and time-series data for temporal pattern analysis. This multi-source 
+                      The system is trained on comprehensive datasets including historical traffic counts,
+                      weather data from meteorological services, calendar information for holidays and
+                      events, and time-series data for temporal pattern analysis. This multi-source
                       approach ensures robust and reliable predictions across various conditions.
                     </p>
                   </div>
@@ -283,7 +284,7 @@ export default function About() {
               <div className="p-8 md:p-10 text-center">
                 <motion.div
                   className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary to-secondary mb-6 shadow-lg shadow-primary/25"
-                  animate={shouldReduceMotion ? undefined : { 
+                  animate={shouldReduceMotion ? undefined : {
                     boxShadow: [
                       '0 10px 25px -5px rgba(var(--primary), 0.25)',
                       '0 10px 40px -5px rgba(var(--primary), 0.4)',
@@ -294,14 +295,14 @@ export default function About() {
                 >
                   <Cloud className="h-8 w-8 text-primary-foreground" />
                 </motion.div>
-                
+
                 <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">About the Developer</h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto mb-8 text-lg">
-                  This project was developed as part of academic research in machine learning and 
-                  urban informatics. It demonstrates the practical application of data science 
+                  This project was developed as part of academic research in machine learning and
+                  urban informatics. It demonstrates the practical application of data science
                   in solving real-world transportation challenges.
                 </p>
-                
+
                 <div className="flex justify-center gap-3 flex-wrap">
                   {['Machine Learning', 'Full-Stack Development', 'Data Science', 'Urban Informatics'].map((tag, index) => (
                     <motion.div
