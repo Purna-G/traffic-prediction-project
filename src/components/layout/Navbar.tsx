@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import {
-  Car,
   Menu,
   Home,
   TrendingUp,
@@ -53,18 +52,7 @@ export function Navbar() {
       transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
     >
       <div className="container flex h-16 lg:h-20 items-center justify-between">
-        <Link to="/" className="flex items-center gap-3 group">
-          <motion.div
-            className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/80 shadow-lg shadow-primary/20"
-            whileHover={shouldReduceMotion ? undefined : { scale: 1.1, rotate: 5 }}
-            transition={{ type: "spring", stiffness: 400 }}
-          >
-            <Car className="h-5 w-5 text-primary-foreground" />
-          </motion.div>
-          <span className="text-xl font-bold text-foreground tracking-tight">
-            Traffic<span className="text-primary">Telligence</span>
-          </span>
-        </Link>
+        {/* Logo removed */}
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-1 bg-background px-2 py-1.5 border border-border/50 rounded-full">
@@ -116,12 +104,7 @@ export function Navbar() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-80 bg-background/95 backdrop-blur-xl border-l border-border/50">
-              <div className="flex items-center gap-3 mb-10">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/80">
-                  <Car className="h-5 w-5 text-primary-foreground" />
-                </div>
-                <span className="text-xl font-bold">TrafficTelligence</span>
-              </div>
+              {/* Logo removed */}
               <nav className="flex flex-col gap-2">
                 <AnimatePresence>
                   {navItems.map((item, index) => {

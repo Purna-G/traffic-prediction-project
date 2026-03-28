@@ -4,8 +4,9 @@ import { Layout } from '@/components/layout/Layout';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { GlassCard } from '@/components/animations/GlassCard';
 import { AnimatedSection } from '@/components/animations/AnimatedSection';
-import { BarChart3, TrendingUp, Calendar, Sparkles } from 'lucide-react';
+import { BarChart3, TrendingUp, Calendar, Sparkles, Car } from 'lucide-react';
 import { getAnalytics, type AnalyticsData } from '@/lib/api';
+import { StatCard } from '@/components/ui/stat-card';
 import {
   ResponsiveContainer,
   LineChart,
@@ -99,6 +100,40 @@ export default function Analytics() {
       <section className="pb-24">
         <div className="container">
           <div className="grid gap-6">
+            {/* Stats Overview */}
+            <AnimatedSection delay={0.05}>
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                <StatCard
+                  title="Total Vehicles"
+                  value={data?.total_vehicles ? data.total_vehicles.toLocaleString() : '0'}
+                  icon={<Car className="h-4 w-4" />}
+                  description="Total vehicle count from dataset"
+                  variant="primary"
+                />
+                <StatCard
+                  title="Average Daily"
+                  value={dailyData.length > 0 ? Math.round(dailyData.reduce((sum, d) => sum + d.traffic, 0) / dailyData.length).toLocaleString() : '0'}
+                  icon={<TrendingUp className="h-4 w-4" />}
+                  description="Average vehicles per day"
+                  variant="success"
+                />
+                <StatCard
+                  title="Peak Hour"
+                  value={seasonalData.length > 0 ? `${seasonalData.reduce((max, d) => d.traffic > max.traffic ? d : max, seasonalData[0]).season}` : 'N/A'}
+                  icon={<Calendar className="h-4 w-4" />}
+                  description="Busiest time of day"
+                  variant="warning"
+                />
+                <StatCard
+                  title="Data Points"
+                  value={dailyData.length.toLocaleString()}
+                  icon={<BarChart3 className="h-4 w-4" />}
+                  description="Total data entries analyzed"
+                  variant="default"
+                />
+              </div>
+            </AnimatedSection>
+
             {/* Daily Traffic Trend */}
             <AnimatedSection delay={0.1}>
               <GlassCard className="p-6" hover={false}>

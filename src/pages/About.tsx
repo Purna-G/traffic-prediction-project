@@ -29,6 +29,8 @@ const techStack = [
   { name: 'Flask', category: 'Backend', color: 'from-secondary/20 to-secondary/10' },
   { name: 'Python', category: 'Backend', color: 'from-secondary/20 to-secondary/10' },
   { name: 'scikit-learn', category: 'ML', color: 'from-chart-4/20 to-chart-4/10' },
+  { name: 'Linear Regression', category: 'ML', color: 'from-chart-4/20 to-chart-4/10' },
+  { name: 'Decision Tree', category: 'ML', color: 'from-chart-4/20 to-chart-4/10' },
   { name: 'XGBoost', category: 'ML', color: 'from-chart-4/20 to-chart-4/10' },
   { name: 'Pandas', category: 'Data', color: 'from-chart-2/20 to-chart-2/10' },
   { name: 'NumPy', category: 'Data', color: 'from-chart-2/20 to-chart-2/10' },
@@ -179,10 +181,9 @@ export default function About() {
 
                   <ul className="space-y-4">
                     {[
-                      { name: 'Random Forest', desc: 'Ensemble method achieving 94.2% accuracy', icon: Cpu },
+                      { name: 'Linear Regression', desc: 'Baseline model for traffic prediction', icon: Cpu },
+                      { name: 'Decision Tree', desc: 'Tree-based model for pattern recognition', icon: Cpu },
                       { name: 'XGBoost', desc: 'Gradient boosting for high-performance predictions', icon: Cpu },
-                      { name: 'Neural Networks', desc: 'Deep learning for complex pattern recognition', icon: Brain },
-                      { name: 'Linear Regression', desc: 'Baseline model for comparison', icon: Cpu },
                     ].map((item, index) => (
                       <motion.li
                         key={item.name}

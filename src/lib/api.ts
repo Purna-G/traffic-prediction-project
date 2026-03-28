@@ -41,11 +41,23 @@ export interface ModelMetrics {
   description?: string;
 }
 
-export interface AnalyticsData {
-  daily: { date: string; traffic: number }[];
-  weekday: { day: string; traffic: number }[];
-  seasonal: { season: string; traffic: number }[];
-  monthly?: { month: string; traffic: number }[];
+export interface JunctionPredictionInput {
+  source_junction: number;
+  dest_junction: number;
+  date: string;
+  time: string;
+}
+
+export interface JunctionPredictionResult {
+  source_junction: number;
+  dest_junction: number;
+  total_vehicle_count: number;
+  source_vehicle_count: number;
+  dest_vehicle_count: number;
+  intermediate_junctions: Array<{ junction: number; vehicle_count: number }>;
+  traffic_level: 'Low' | 'Medium' | 'High';
+  date: string;
+  time: string;
 }
 
 // API Functions
@@ -75,6 +87,18 @@ export async function getHistory(): Promise<HistoryRecord[]> {
 export async function getAnalytics(): Promise<AnalyticsData> {
   const response = await fetch(`${API_BASE_URL}/analytics`);
   if (!response.ok) throw new Error('Failed to fetch analytics');
+  return response.json();
+}
+
+export async function predictJunctionVehicles(input: JunctionPredictionInput): Promise<JunctionPredictionResult> {
+  const response = await fetch(`${API_BASE_URL}/junction-predict`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(input),
+  });
+  if (!response.ok) throw new Error('Failed to predict junction vehicles');
   return response.json();
 }
 

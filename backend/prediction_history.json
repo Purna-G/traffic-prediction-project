@@ -1,0 +1,716 @@
+[
+  {
+    "id": "23240aac",
+    "date": "2026-03-25",
+    "inputs": {
+      "from_loc": "Tuni, Kakinada, Andhra Pradesh",
+      "to_loc": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam",
+      "date": "2026-03-25",
+      "time": "05:00"
+    },
+    "prediction": {
+      "vehicle_count": 15,
+      "traffic_level": "Low",
+      "distance_km": 102.4,
+      "estimated_duration_min": 117.0,
+      "weather_condition": "Clear",
+      "temperature": 20.0,
+      "route_from": "Tuni, Kakinada, Andhra Pradesh",
+      "route_to": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam"
+    },
+    "created_at": "2026-03-25T15:56:37.753124"
+  },
+  {
+    "id": "fd2144cb",
+    "date": "2026-03-25",
+    "inputs": {
+      "from_loc": "Kakinada, Kakinada (Urban), Kakinada",
+      "to_loc": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam",
+      "date": "2026-03-25",
+      "time": "05:00"
+    },
+    "prediction": {
+      "vehicle_count": 15,
+      "traffic_level": "Low",
+      "distance_km": 170.0,
+      "estimated_duration_min": 131.0,
+      "weather_condition": "Cloudy",
+      "temperature": 35.9,
+      "route_from": "Kakinada, Kakinada (Urban), Kakinada",
+      "route_to": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam"
+    },
+    "created_at": "2026-03-25T15:36:53.049204"
+  },
+  {
+    "id": "a41c40ff",
+    "date": "2026-03-25",
+    "inputs": {
+      "from_loc": "Kakinada, Kakinada (Urban), Kakinada",
+      "to_loc": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam",
+      "date": "2026-03-25",
+      "time": "05:00"
+    },
+    "prediction": {
+      "vehicle_count": 15,
+      "traffic_level": "Low",
+      "distance_km": 170.0,
+      "estimated_duration_min": 184.0,
+      "weather_condition": "Cloudy",
+      "temperature": 35.9,
+      "route_from": "Kakinada, Kakinada (Urban), Kakinada",
+      "route_to": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam"
+    },
+    "created_at": "2026-03-25T15:36:43.078331"
+  },
+  {
+    "id": "efddf01c",
+    "date": "2026-03-25",
+    "inputs": {
+      "from_loc": "Tuni, Kakinada, Andhra Pradesh",
+      "to_loc": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam",
+      "date": "2026-03-25",
+      "time": "03:00"
+    },
+    "prediction": {
+      "vehicle_count": 19,
+      "traffic_level": "Low",
+      "distance_km": 102.4,
+      "estimated_duration_min": 84.0,
+      "weather_condition": "Cloudy",
+      "temperature": 35.1,
+      "route_from": "Tuni, Kakinada, Andhra Pradesh",
+      "route_to": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam"
+    },
+    "created_at": "2026-03-25T15:19:49.066069"
+  },
+  {
+    "id": "5d77d322",
+    "date": "2026-03-25",
+    "inputs": {
+      "from_loc": "Tuni, Kakinada, Andhra Pradesh",
+      "to_loc": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam",
+      "date": "2026-03-25",
+      "time": "03:00"
+    },
+    "prediction": {
+      "vehicle_count": 19,
+      "traffic_level": "Low",
+      "distance_km": 102.4,
+      "estimated_duration_min": 117.0,
+      "weather_condition": "Cloudy",
+      "temperature": 35.1,
+      "route_from": "Tuni, Kakinada, Andhra Pradesh",
+      "route_to": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam"
+    },
+    "created_at": "2026-03-25T15:19:10.578417"
+  },
+  {
+    "id": "8f9eeccf",
+    "date": "2026-03-25",
+    "inputs": {
+      "from_loc": "Tuni, Kakinada, Andhra Pradesh",
+      "to_loc": "Bhimavaram, West Godavari, Andhra Pradesh",
+      "date": "2026-03-25",
+      "time": "04:00"
+    },
+    "prediction": {
+      "vehicle_count": 17,
+      "traffic_level": "Low",
+      "distance_km": 189.1,
+      "estimated_duration_min": 109.0,
+      "weather_condition": "Cloudy",
+      "temperature": 35.1,
+      "route_from": "Tuni, Kakinada, Andhra Pradesh",
+      "route_to": "Bhimavaram, West Godavari, Andhra Pradesh"
+    },
+    "created_at": "2026-03-25T09:26:26.836377"
+  },
+  {
+    "id": "d48f063f",
+    "date": "2026-03-25",
+    "inputs": {
+      "from_loc": "Tuni, Kakinada, Andhra Pradesh",
+      "to_loc": "Bhimavaram, West Godavari, Andhra Pradesh",
+      "date": "2026-03-25",
+      "time": "04:00"
+    },
+    "prediction": {
+      "vehicle_count": 17,
+      "traffic_level": "Low",
+      "distance_km": 189.1,
+      "estimated_duration_min": 190.0,
+      "weather_condition": "Cloudy",
+      "temperature": 35.1,
+      "route_from": "Tuni, Kakinada, Andhra Pradesh",
+      "route_to": "Bhimavaram, West Godavari, Andhra Pradesh"
+    },
+    "created_at": "2026-03-25T09:26:15.946122"
+  },
+  {
+    "id": "b0ecb424",
+    "date": "2026-03-25",
+    "inputs": {
+      "from_loc": "Tuni, Kakinada, Andhra Pradesh",
+      "to_loc": "Bhimavaram, West Godavari, Andhra Pradesh",
+      "date": "2026-03-25",
+      "time": "04:00"
+    },
+    "prediction": {
+      "vehicle_count": 17,
+      "traffic_level": "Low",
+      "distance_km": 189.1,
+      "estimated_duration_min": 136.0,
+      "weather_condition": "Cloudy",
+      "temperature": 35.1,
+      "route_from": "Tuni, Kakinada, Andhra Pradesh",
+      "route_to": "Bhimavaram, West Godavari, Andhra Pradesh"
+    },
+    "created_at": "2026-03-25T09:26:07.978474"
+  },
+  {
+    "id": "b095c732",
+    "date": "2026-03-25",
+    "inputs": {
+      "from_loc": "Tuni, Kakinada, Andhra Pradesh",
+      "to_loc": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam",
+      "date": "2026-03-25",
+      "time": "10:00"
+    },
+    "prediction": {
+      "vehicle_count": 28,
+      "traffic_level": "Medium",
+      "distance_km": 102.4,
+      "estimated_duration_min": 80.0,
+      "weather_condition": "Cloudy",
+      "temperature": 35.1,
+      "route_from": "Tuni, Kakinada, Andhra Pradesh",
+      "route_to": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam"
+    },
+    "created_at": "2026-03-25T09:05:19.631931"
+  },
+  {
+    "id": "032bb5c2",
+    "date": "2026-03-25",
+    "inputs": {
+      "from_loc": "Tuni, Kakinada, Andhra Pradesh",
+      "to_loc": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam",
+      "date": "2026-03-25",
+      "time": "10:00"
+    },
+    "prediction": {
+      "vehicle_count": 28,
+      "traffic_level": "Medium",
+      "distance_km": 102.4,
+      "estimated_duration_min": 141.0,
+      "weather_condition": "Cloudy",
+      "temperature": 35.1,
+      "route_from": "Tuni, Kakinada, Andhra Pradesh",
+      "route_to": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam"
+    },
+    "created_at": "2026-03-25T09:04:56.840391"
+  },
+  {
+    "id": "bb945ed2",
+    "date": "2026-03-25",
+    "inputs": {
+      "from_loc": "Tuni, Kakinada, Andhra Pradesh",
+      "to_loc": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam",
+      "date": "2026-03-25",
+      "time": "10:00"
+    },
+    "prediction": {
+      "vehicle_count": 28,
+      "traffic_level": "Medium",
+      "distance_km": 102.4,
+      "estimated_duration_min": 100.0,
+      "weather_condition": "Cloudy",
+      "temperature": 35.1,
+      "route_from": "Tuni, Kakinada, Andhra Pradesh",
+      "route_to": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam"
+    },
+    "created_at": "2026-03-25T09:04:47.199658"
+  },
+  {
+    "id": "6e85ec4c",
+    "date": "2024-01-01",
+    "inputs": {
+      "from_loc": "New York",
+      "to_loc": "Jersey City",
+      "date": "2024-01-01",
+      "time": "08:00"
+    },
+    "prediction": {
+      "vehicle_count": 13,
+      "traffic_level": "Low",
+      "distance_km": 6.5,
+      "estimated_duration_min": 14.0,
+      "weather_condition": "Unknown",
+      "temperature": 0.0,
+      "route_from": "New York",
+      "route_to": "Jersey City"
+    },
+    "created_at": "2026-03-25T09:03:31.156992"
+  },
+  {
+    "id": "db1949e1",
+    "date": "2024-01-01",
+    "inputs": {
+      "from_loc": "New York",
+      "to_loc": "Jersey City",
+      "date": "2024-01-01",
+      "time": "08:00"
+    },
+    "prediction": {
+      "vehicle_count": 13,
+      "traffic_level": "Low",
+      "distance_km": 6.5,
+      "estimated_duration_min": 10.0,
+      "weather_condition": "Unknown",
+      "temperature": 0.0,
+      "route_from": "New York",
+      "route_to": "Jersey City"
+    },
+    "created_at": "2026-03-25T09:03:15.230545"
+  },
+  {
+    "id": "8d7b5817",
+    "date": "2024-01-01",
+    "inputs": {
+      "from_loc": "New York",
+      "to_loc": "Jersey City",
+      "date": "2024-01-01",
+      "time": "08:00"
+    },
+    "prediction": {
+      "vehicle_count": 13,
+      "traffic_level": "Low",
+      "distance_km": 6.5,
+      "estimated_duration_min": 18.0,
+      "weather_condition": "Unknown",
+      "temperature": 0.0,
+      "route_from": "New York",
+      "route_to": "Jersey City"
+    },
+    "created_at": "2026-03-25T09:03:02.233167"
+  },
+  {
+    "id": "30db0d68",
+    "date": "2024-01-01",
+    "inputs": {
+      "from_loc": "New York",
+      "to_loc": "Jersey City",
+      "date": "2024-01-01",
+      "time": "08:00"
+    },
+    "prediction": {
+      "vehicle_count": 13,
+      "traffic_level": "Low",
+      "distance_km": 6.5,
+      "estimated_duration_min": 13.0,
+      "weather_condition": "Unknown",
+      "temperature": 0.0,
+      "route_from": "New York",
+      "route_to": "Jersey City"
+    },
+    "created_at": "2026-03-25T09:02:53.254659"
+  },
+  {
+    "id": "bc735531",
+    "date": "2026-03-25",
+    "inputs": {
+      "from_loc": "Tuni",
+      "to_loc": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam",
+      "date": "2026-03-25",
+      "time": "04:00"
+    },
+    "prediction": {
+      "vehicle_count": 16,
+      "traffic_level": "Low",
+      "distance_km": 102.4,
+      "estimated_duration_min": 84.0,
+      "weather_condition": "Cloudy",
+      "temperature": 35.1,
+      "route_from": "Tuni",
+      "route_to": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam"
+    },
+    "created_at": "2026-03-25T08:58:09.270362"
+  },
+  {
+    "id": "fd406d7a",
+    "date": "2026-03-25",
+    "inputs": {
+      "from_loc": "Tuni",
+      "to_loc": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam",
+      "date": "2026-03-25",
+      "time": "04:00"
+    },
+    "prediction": {
+      "vehicle_count": 16,
+      "traffic_level": "Low",
+      "distance_km": 102.4,
+      "estimated_duration_min": 84.0,
+      "weather_condition": "Cloudy",
+      "temperature": 35.1,
+      "route_from": "Tuni",
+      "route_to": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam"
+    },
+    "created_at": "2026-03-25T08:57:57.961692"
+  },
+  {
+    "id": "ed72a311",
+    "date": "2026-03-25",
+    "inputs": {
+      "from_loc": "Tuni",
+      "to_loc": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam",
+      "date": "2026-03-25",
+      "time": "04:00"
+    },
+    "prediction": {
+      "vehicle_count": 16,
+      "traffic_level": "Low",
+      "distance_km": 102.4,
+      "estimated_duration_min": 84.0,
+      "weather_condition": "Cloudy",
+      "temperature": 35.1,
+      "route_from": "Tuni",
+      "route_to": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam"
+    },
+    "created_at": "2026-03-25T08:57:49.399638"
+  },
+  {
+    "id": "23525d8b",
+    "date": "2024-01-01",
+    "inputs": {
+      "from_loc": "New York",
+      "to_loc": "Jersey City",
+      "date": "2024-01-01",
+      "time": "08:00"
+    },
+    "prediction": {
+      "vehicle_count": 13,
+      "traffic_level": "Low",
+      "distance_km": 6.5,
+      "estimated_duration_min": 13.0,
+      "weather_condition": "Unknown",
+      "temperature": 0.0,
+      "route_from": "New York",
+      "route_to": "Jersey City"
+    },
+    "created_at": "2026-03-25T08:56:53.753538"
+  },
+  {
+    "id": "dd681470",
+    "date": "2024-01-01",
+    "inputs": {
+      "from_loc": "New York",
+      "to_loc": "Jersey City",
+      "date": "2024-01-01",
+      "time": "08:00"
+    },
+    "prediction": {
+      "vehicle_count": 13,
+      "traffic_level": "Low",
+      "distance_km": 6.5,
+      "estimated_duration_min": 13.0,
+      "weather_condition": "Unknown",
+      "temperature": 0.0,
+      "route_from": "New York",
+      "route_to": "Jersey City"
+    },
+    "created_at": "2026-03-25T08:56:18.179378"
+  },
+  {
+    "id": "5e0d5ad3",
+    "date": "2026-03-24",
+    "inputs": {
+      "from_loc": "Guntur",
+      "to_loc": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam",
+      "date": "2026-03-24",
+      "time": "00:00"
+    },
+    "prediction": {
+      "vehicle_count": 31,
+      "traffic_level": "High",
+      "distance_km": 390.4,
+      "estimated_duration_min": 345.0,
+      "weather_condition": "Cloudy",
+      "temperature": 33.5,
+      "route_from": "Guntur",
+      "route_to": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam"
+    },
+    "created_at": "2026-03-24T20:59:07.885055"
+  },
+  {
+    "id": "b485984f",
+    "date": "2026-03-24",
+    "inputs": {
+      "from_loc": "Guntur",
+      "to_loc": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam",
+      "date": "2026-03-24",
+      "time": "00:00"
+    },
+    "prediction": {
+      "vehicle_count": 31,
+      "traffic_level": "High",
+      "distance_km": 390.4,
+      "estimated_duration_min": 345.0,
+      "weather_condition": "Cloudy",
+      "temperature": 33.5,
+      "route_from": "Guntur",
+      "route_to": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam"
+    },
+    "created_at": "2026-03-24T20:58:53.637232"
+  },
+  {
+    "id": "b628307e",
+    "date": "2026-03-24",
+    "inputs": {
+      "from_loc": "tuni",
+      "to_loc": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam",
+      "date": "2026-03-24",
+      "time": "00:00"
+    },
+    "prediction": {
+      "vehicle_count": 31,
+      "traffic_level": "High",
+      "distance_km": 102.4,
+      "estimated_duration_min": 100.0,
+      "weather_condition": "Clear",
+      "temperature": 32.6,
+      "route_from": "tuni",
+      "route_to": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam"
+    },
+    "created_at": "2026-03-24T20:57:50.644439"
+  },
+  {
+    "id": "416358bf",
+    "date": "2026-03-24",
+    "inputs": {
+      "from_loc": "tuni",
+      "to_loc": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam",
+      "date": "2026-03-24",
+      "time": "22:00"
+    },
+    "prediction": {
+      "vehicle_count": 34,
+      "traffic_level": "High",
+      "distance_km": 102.4,
+      "estimated_duration_min": 100.0,
+      "weather_condition": "Clear",
+      "temperature": 32.6,
+      "route_from": "tuni",
+      "route_to": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam"
+    },
+    "created_at": "2026-03-24T20:57:32.474328"
+  },
+  {
+    "id": "ca668349",
+    "date": "2026-03-24",
+    "inputs": {
+      "from_loc": "tuni",
+      "to_loc": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam",
+      "date": "2026-03-24",
+      "time": "22:00"
+    },
+    "prediction": {
+      "vehicle_count": 34,
+      "traffic_level": "High",
+      "distance_km": 102.4,
+      "estimated_duration_min": 100.0,
+      "weather_condition": "Clear",
+      "temperature": 32.6,
+      "route_from": "tuni",
+      "route_to": "Vishakapatnam Ralway Station, Gnanapuram, Visakhapatnam"
+    },
+    "created_at": "2026-03-24T20:57:04.583037"
+  },
+  {
+    "id": "09d05452",
+    "date": "2026-03-24",
+    "inputs": {
+      "from_loc": "Tuni, Kakinada, Andhra Pradesh",
+      "to_loc": "Visakhapatnam, Visakhapatnam (Urban), Visakhapatnam",
+      "date": "2026-03-24",
+      "time": "21:00"
+    },
+    "prediction": {
+      "vehicle_count": 35,
+      "traffic_level": "High",
+      "distance_km": 104.6,
+      "estimated_duration_min": 103.0,
+      "weather_condition": "Clear",
+      "temperature": 32.6,
+      "route_from": "Tuni, Kakinada, Andhra Pradesh",
+      "route_to": "Visakhapatnam, Visakhapatnam (Urban), Visakhapatnam"
+    },
+    "created_at": "2026-03-24T20:50:21.658451"
+  },
+  {
+    "id": "36ca8874",
+    "date": "2026-03-24",
+    "inputs": {
+      "from_loc": "Tuni, Kakinada, Andhra Pradesh",
+      "to_loc": "Visakhapatnam, Visakhapatnam (Urban), Visakhapatnam",
+      "date": "2026-03-24",
+      "time": "21:00"
+    },
+    "prediction": {
+      "vehicle_count": 35,
+      "traffic_level": "High",
+      "distance_km": 104.6,
+      "estimated_duration_min": 103.0,
+      "weather_condition": "Clear",
+      "temperature": 32.6,
+      "route_from": "Tuni, Kakinada, Andhra Pradesh",
+      "route_to": "Visakhapatnam, Visakhapatnam (Urban), Visakhapatnam"
+    },
+    "created_at": "2026-03-24T20:49:57.724713"
+  },
+  {
+    "id": "e56bb2fc",
+    "date": "2026-02-03",
+    "inputs": {
+      "from_loc": "Doddanapudi, Kalla, West Godavari",
+      "to_loc": "Kalla, West Godavari, Andhra Pradesh",
+      "date": "2026-02-03",
+      "time": "09:00"
+    },
+    "prediction": {
+      "vehicle_count": 23,
+      "traffic_level": "Medium",
+      "distance_km": 3.3,
+      "estimated_duration_min": 4.0,
+      "weather_condition": "Cloudy",
+      "temperature": 31.5,
+      "route_from": "Doddanapudi, Kalla, West Godavari",
+      "route_to": "Kalla, West Godavari, Andhra Pradesh"
+    },
+    "created_at": "2026-02-02T13:21:30.878554"
+  },
+  {
+    "id": "a8ccb8f4",
+    "date": "2026-02-11",
+    "inputs": {
+      "from_loc": "Tuni, Kakinada, Andhra Pradesh",
+      "to_loc": "Bhimavaram, West Godavari, Andhra Pradesh",
+      "date": "2026-02-11",
+      "time": "15:00"
+    },
+    "prediction": {
+      "vehicle_count": 29,
+      "traffic_level": "Medium",
+      "distance_km": 188.2,
+      "estimated_duration_min": 164.0,
+      "weather_condition": "Clear",
+      "temperature": 20.0,
+      "route_from": "Tuni, Kakinada, Andhra Pradesh",
+      "route_to": "Bhimavaram, West Godavari, Andhra Pradesh"
+    },
+    "created_at": "2026-02-02T13:04:52.578745"
+  },
+  {
+    "id": "6cf0ced7",
+    "date": "2026-02-02",
+    "inputs": {
+      "from_loc": "london",
+      "to_loc": "Manchester ",
+      "date": "2026-02-02",
+      "time": "14:00"
+    },
+    "prediction": {
+      "vehicle_count": 30,
+      "traffic_level": "High",
+      "distance_km": 320.2,
+      "estimated_duration_min": 292.0,
+      "weather_condition": "Clear",
+      "temperature": 10.1,
+      "route_from": "london",
+      "route_to": "Manchester "
+    },
+    "created_at": "2026-02-01T00:08:23.656038"
+  },
+  {
+    "id": "ede6ed12",
+    "date": "2026-02-02",
+    "inputs": {
+      "from_loc": "mumbai",
+      "to_loc": "pune",
+      "date": "2026-02-02",
+      "time": "18:00"
+    },
+    "prediction": {
+      "vehicle_count": 27,
+      "traffic_level": "Medium",
+      "distance_km": 149.1,
+      "estimated_duration_min": 143.0,
+      "weather_condition": "Cloudy",
+      "temperature": 25.1,
+      "route_from": "mumbai",
+      "route_to": "pune"
+    },
+    "created_at": "2026-02-01T00:07:47.053864"
+  },
+  {
+    "id": "a89cefa1",
+    "date": "2026-02-01",
+    "inputs": {
+      "from_loc": "\tLos Angeles",
+      "to_loc": "\tSan Francisco",
+      "date": "2026-02-01",
+      "time": "03:00"
+    },
+    "prediction": {
+      "vehicle_count": 15,
+      "traffic_level": "Low",
+      "distance_km": 612.5,
+      "estimated_duration_min": 425.0,
+      "weather_condition": "Cloudy",
+      "temperature": 28.7,
+      "route_from": "\tLos Angeles",
+      "route_to": "\tSan Francisco"
+    },
+    "created_at": "2026-02-01T00:06:52.932184"
+  },
+  {
+    "id": "06a36b6b",
+    "date": "2026-02-01",
+    "inputs": {
+      "from_loc": "new york",
+      "to_loc": "baston",
+      "date": "2026-02-01",
+      "time": "08:00"
+    },
+    "prediction": {
+      "vehicle_count": 14,
+      "traffic_level": "Low",
+      "distance_km": 2306.4,
+      "estimated_duration_min": 1773.0,
+      "weather_condition": "Cloudy",
+      "temperature": -5.7,
+      "route_from": "new york",
+      "route_to": "baston"
+    },
+    "created_at": "2026-02-01T00:05:56.721751"
+  },
+  {
+    "id": "47e72554",
+    "date": "2026-01-13",
+    "inputs": {
+      "from_loc": "samalkota",
+      "to_loc": "Bhimavaram",
+      "date": "2026-01-13",
+      "time": "11:00"
+    },
+    "prediction": {
+      "vehicle_count": 0,
+      "traffic_level": "Low",
+      "distance_km": 137.5,
+      "estimated_duration_min": 113.0,
+      "weather_condition": "Unknown",
+      "temperature": 0.0,
+      "route_from": "samalkota",
+      "route_to": "Bhimavaram"
+    },
+    "created_at": "2026-01-31T23:45:46.919850"
+  }
+]

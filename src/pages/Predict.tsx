@@ -3,16 +3,20 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { Layout } from '@/components/layout/Layout';
 import { PredictionForm } from '@/components/prediction/PredictionForm';
 import { PredictionResult } from '@/components/prediction/PredictionResult';
+import { JunctionPredictionForm } from '@/components/prediction/JunctionPredictionForm';
+import { JunctionPredictionResultComponent } from '@/components/prediction/JunctionPredictionResult';
 import { AnimatedSection } from '@/components/animations/AnimatedSection';
-import { type PredictionInput, type PredictionResult as PredictionResultType, predictTraffic } from '@/lib/api';
+import { type PredictionInput, type PredictionResult as PredictionResultType, type JunctionPredictionResult, predictTraffic } from '@/lib/api';
 import { toast } from '@/hooks/use-toast';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, MapPin } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 // 3D components removed
 
 export default function Predict() {
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<PredictionResultType | null>(null);
+  const [junctionResult, setJunctionResult] = useState<JunctionPredictionResult | null>(null);
   const shouldReduceMotion = useReducedMotion();
 
   const handlePredict = async (input: PredictionInput) => {
@@ -35,6 +39,10 @@ export default function Predict() {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleJunctionPredict = (result: JunctionPredictionResult) => {
+    setJunctionResult(result);
   };
 
   return (
@@ -72,14 +80,33 @@ export default function Predict() {
         <div className="container">
           <div className="max-w-5xl mx-auto space-y-8">
             <AnimatedSection delay={0.1}>
-              <PredictionForm onSubmit={handlePredict} isLoading={isLoading} />
-            </AnimatedSection>
+              <Tabs defaultValue="location" className="w-full">
+                <TabsList className="grid w-full grid-cols-2">
+                  <TabsTrigger value="location" className="flex items-center gap-2">
+                    <Sparkles className="h-4 w-4" />
+                    Location Prediction
+                  </TabsTrigger>
+                  <TabsTrigger value="junction" className="flex items-center gap-2">
+                    <MapPin className="h-4 w-4" />
+                    Junction Prediction
+                  </TabsTrigger>
+                </TabsList>
 
-            {result && (
-              <AnimatedSection delay={0.2}>
-                <PredictionResult result={result} />
-              </AnimatedSection>
-            )}
+                <TabsContent value="location" className="space-y-6">
+                  <PredictionForm onSubmit={handlePredict} isLoading={isLoading} />
+                  {result && (
+                    <PredictionResult result={result} />
+                  )}
+                </TabsContent>
+
+                <TabsContent value="junction" className="space-y-6">
+                  <JunctionPredictionForm onResult={handleJunctionPredict} />
+                  {junctionResult && (
+                    <JunctionPredictionResultComponent result={junctionResult} />
+                  )}
+                </TabsContent>
+              </Tabs>
+            </AnimatedSection>
           </div>
         </div>
       </section>

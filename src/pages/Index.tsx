@@ -35,7 +35,7 @@ const features = [
   {
     icon: Cpu,
     title: 'Advanced ML Models',
-    description: 'Powered by Random Forest, XGBoost, and regression algorithms for reliable predictions.',
+    description: 'Powered by Linear Regression, Decision Tree, XGBoost, and ensemble algorithms for reliable predictions.',
   },
   {
     icon: BarChart3,

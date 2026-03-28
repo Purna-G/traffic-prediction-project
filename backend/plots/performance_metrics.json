@@ -1,0 +1,18 @@
+{
+  "metrics_percent": {
+    "accuracy": 93.33,
+    "precision_macro": 92.07,
+    "recall_macro": 90.44,
+    "f1_macro": 91.22
+  },
+  "class_names": [
+    "High",
+    "Low",
+    "Medium"
+  ],
+  "roc_auc_per_class": {
+    "High": 0.996,
+    "Low": 0.9894,
+    "Medium": 0.974
+  }
+}
