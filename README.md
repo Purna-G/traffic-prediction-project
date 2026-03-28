@@ -11,7 +11,7 @@ There are several ways of editing your application.
 
 **Use Lovable**
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+Simply visit the (https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
 
 Changes made via Lovable will be committed automatically to this repo.
 
@@ -65,7 +65,7 @@ This project is built with:
 
 Simply open (https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
 
-## Can I connect a custom domain to my Lovable project?
+## Can I connect a custom domain to my project?
 
 Yes, you can!
 
@@ -75,3 +75,134 @@ Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/c
 =======
 # traffic-prediction-project
 >>>>>>> 33ccb9195e8c391c5e5ae9b8d81f4bc65c8e9b78
+>>>>>>>  # traffic-prediction-project
+# 🚦 Traffic Prediction System
+
+## 📌 Project Overview
+
+This project is a **Machine Learning-based Traffic Prediction System** that predicts vehicle traffic at different junctions using historical data.
+
+The system uses multiple regression models and selects the best-performing model (**XGBoost**) to provide accurate predictions.
+
+---
+
+## 🎯 Features
+
+* Predict traffic volume for 4 different junctions
+* User-friendly interface using Streamlit
+* Real-time prediction based on date and time inputs
+* Model comparison (Decision Tree, Linear Regression, XGBoost)
+* Saved models using Pickle for fast predictions
+
+---
+
+## 🧠 Machine Learning Models Used
+
+* Decision Tree Regressor
+* Linear Regression
+* XGBoost Regressor ✅ (Best Model)
+
+---
+
+## 📊 Best Model Selection
+
+| Junction   | Best Model |
+| ---------- | ---------- |
+| Junction 1 | XGBoost    |
+| Junction 2 | XGBoost    |
+| Junction 3 | XGBoost    |
+| Junction 4 | XGBoost    |
+
+---
+
+## ⚙️ Tech Stack
+
+* Python 🐍
+* Pandas & NumPy
+* Scikit-learn
+* XGBoost
+* Streamlit
+* Git & GitHub
+
+---
+
+## 📂 Project Structure
+
+```
+traffic-insight-dashboard/
+│
+├── backend/
+│   ├── app.py
+│   ├── predict_page.py
+│   ├── final_model_1.pkl
+│   ├── final_model_2.pkl
+│   ├── final_model_3.pkl
+│   ├── final_model_4.pkl
+│
+├── data/
+│   └── traffic.csv
+│
+├── plots/
+│
+├── README.md
+```
+
+---
+
+## 🚀 How to Run the Project
+
+### 1️⃣ Clone the repository
+
+```
+git clone https://github.com/Purna-G/traffic-prediction-project.git
+cd traffic-prediction-project
+```
+
+### 2️⃣ Create environment
+
+```
+conda create -n streamlit_newenv python=3.10
+conda activate streamlit_newenv
+```
+
+### 3️⃣ Install dependencies
+
+```
+pip install -r requirements.txt
+```
+
+### 4️⃣ Run the app
+
+```
+python -m streamlit run app.py
+```
+
+---
+
+## 📸 Output
+
+* Select Junction
+* Enter Date & Time
+* Predict Traffic Volume
+
+---
+
+## 💡 Future Improvements
+
+* Add real-time traffic data
+* Improve UI/UX
+* Deploy the app online
+* Add visualization dashboards
+
+---
+
+## 👨‍💻 Author
+
+**Purna G**
+
+---
+
+## ⭐ If you like this project
+
+Give it a ⭐ on GitHub!
+
